@@ -27,11 +27,11 @@
     <div class="table-responsive">
         <table class="table">
             <thead>
-                <tr><th>Code</th><th>Product</th><th>Category</th><th>Cost</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr>
+                <tr><th>Code</th><th>Product</th><th>Category</th><th>Cost</th><th>Price</th><th>Margin</th><th>Stock</th><th>Status</th><th>Actions</th></tr>
             </thead>
             <tbody>
             {% if not products %}
-            <tr><td colspan="8"><div class="empty-state"><i class="bi bi-box-seam"></i><p>No products found.</p></div></td></tr>
+            <tr><td colspan="9"><div class="empty-state"><i class="bi bi-box-seam"></i><p>No products found.</p></div></td></tr>
             {% else %}
             {% for p in products %}
             <tr>
@@ -43,6 +43,7 @@
                 <td>{{ p.category_name or '—' }}</td>
                 <td>{{ fmt_currency(p.cost_price) }}</td>
                 <td class="fw-600">{{ fmt_currency(p.selling_price) }}</td>
+                <td>{{ p.margin ~ '%' if p.margin is not none else '—' }}</td>
                 <td>
                     <div class="d-flex align-items-center gap-2">
                         <span class="fw-600">{{ p.stock_quantity }}</span>

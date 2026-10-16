@@ -82,6 +82,10 @@ def index():
         tuple(params) + (per_page, offset),
     )
     for p in products:
+        p["margin"] = (
+            round((p["selling_price"] - p["cost_price"]) / p["selling_price"] * 100, 1)
+            if p["selling_price"] else None
+        )
         if p["stock_quantity"] == 0:
             p["badge"], p["label"] = "badge-out-stock", "Out of Stock"
         elif p["stock_quantity"] <= p["min_stock_level"]:
